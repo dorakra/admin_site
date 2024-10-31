@@ -1,0 +1,151 @@
+:root {
+    --primary: #3b7b1f;
+    --secondary: #2b6b21;
+    --link-fg: #447e9b;
+    --link-selected-fg: #d0e0c6;
+    --accent: #b8e4a6;
+    --header-color: #fcf;
+    --readonly-color: #929292;
+    --color-maximumred: #dc2323;
+}
+
+th {
+    font-weight: 400;
+}
+
+.app-ER_HTV form input[type="submit"],
+.app-adatfeldolgozas form input[type="submit"] {
+    background: var(--delete-button-bg);
+    border-radius: 4px;
+    padding: 10px 15px;
+    color: var(--button-fg);
+}
+
+.app-ER_HTV form input[type="submit"]:active,
+.app-ER_HTV form input[type="submit"]:focus,
+.app-ER_HTV form input[type="submit"]:hover,
+.app-adatfeldolgozas form input[type="submit"]:active,
+.app-adatfeldolgozas form input[type="submit"]:focus,
+.app-adatfeldolgozas form input[type="submit"]:hover {
+    background: var(--delete-button-hover-bg);
+}
+
+.app-ER_HTV form .cancel-link,
+.app-adatfeldolgozas form .cancel-link {
+    display: inline-block;
+    vertical-align: middle;
+    height: 15px;
+    line-height: 15px;
+    border-radius: 4px;
+    padding: 10px 15px;
+    color: var(--button-fg);
+    background: var(--close-button-bg);
+    margin: 0 0 0 10px;
+}
+
+.app-ER_HTV form .cancel-link:active,
+.app-ER_HTV form .cancel-link:focus,
+.app-ER_HTV form .cancel-link:hover,
+.app-adatfeldolgozas form .cancel-link:active,
+.app-adatfeldolgozas form .cancel-link:focus,
+.app-adatfeldolgozas form .cancel-link:hover {
+    background: var(--close-button-hover-bg);
+}
+
+.aligned label {
+    font-weight: bold;
+}
+
+.aligned label:not(.vCheckboxLabel).required:after,
+.required label::after {
+    margin-inline: 0.15em;
+    content: "*";
+    color: var(--color-maximumred);
+}
+
+label:has(+ .readonly), /* label before .readonly */
+.readonly {
+    color: var(--readonly-color);
+    font-weight: normal;
+}
+
+label:has(+ .readonly), /* label before .readonly */
+.readonly {
+    color: var(--readonly-color);
+}
+
+.readonly a {
+    cursor: default;
+    color: var(--readonly-color);
+    text-decoration: none;
+}
+
+.readonly a:hover,
+.readonly a:focus {
+    color: var(--readonly-color);
+    text-decoration: none;
+}
+
+
+/*
+    collapsible inline models
+*/
+a.stacked_collapse-toggle {
+    cursor: pointer;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 400;
+    padding: 5px 10px;
+    background: var(--close-button-bg);
+    border: none;
+}
+
+
+/*
+    radio select
+*/
+.related-widget-wrapper > div > div {
+    display: inline-block;
+}
+
+.inline-group .aligned .related-widget-wrapper label {
+    width: auto;
+}
+
+/*
+    jkv_adat_id in popup form
+*/
+
+body.popup fieldset .form-row.field-jkv_adat {
+    display: none;
+}
+
+/*
+    changelist_inline valtoztatasok
+*/
+
+.django_changelist_inline #toolbar {
+    font-size: inherit !important;
+}
+
+.django_changelist_inline__toolbar a:last-child {
+    margin-left: inherit !important;
+}
+
+/*
+    checkbox megforditasa
+*/
+
+.flex-container.checkbox-row label {
+    order: 1;
+    min-width: 160px;
+    width: 160px;
+    word-wrap: break-word;
+    padding: 4px 10px 0 0;
+}
+
+.flex-container.checkbox-row input {
+    order: 2;
+    padding: 6px 8px;
+    margin: 0;
+}

@@ -1,0 +1,44 @@
+{% load i18n admin_list %}
+
+{{ inline_admin_formset.formset.management_form }}
+{% with cl=inline_admin_formset.opts.changelist %}
+  {% if cl %}
+
+    <fieldset class="module django_changelist_inline collapsible" aria-labelledby="inline-heading">
+      <details open><summary>
+      <h2 class="inline-heading">{{ cl.model_admin.title }}</h2>
+      </summary>
+      <div id="changelist">
+        <div class="changelist-form-container">
+          {% if cl.result_list %}
+            {% result_list cl %}
+            {% block pagination %}{% pagination cl %}{% endblock %}
+          {% else %}
+            <p class="paginator">
+              {{ cl.model_admin.no_results_message }}
+            </p>
+          {% endif %}
+          {% if cl.has_toolbar %}
+            <div id="toolbar" class="django_changelist_inline__toolbar">
+              {% if cl.add_url %}
+                {{ cl.add_url|safe }}
+<!--
+                <a class="addlink" href="{{ cl.add_url }}">
+                  {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+                </a>
+-->
+              {% endif %}
+              {% if cl.toolbar_links %}
+                {{ cl.toolbar_links|safe }}
+              {% endif %}
+              {% if cl.show_all_url %}
+                <a href="{{ cl.show_all_url }}">{% trans 'Show all' %} &raquo;</a>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      </details>
+    </fieldset>
+  {% endif %}
+{% endwith %}

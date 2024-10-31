@@ -1,0 +1,47 @@
+<!-- templates/import.html -->
+
+{% extends "admin/base_site.html" %}
+{% load i18n l10n admin_urls static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {{ media }}
+    <script src="{% static 'admin/js/cancel.js' %}" async></script>
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} mvp-create{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+&rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+&rsaquo; Mintavételi pontok importja
+</div>
+{% endblock %}
+
+{% block content %}
+<h1>Mintavételi pontok importja fájlból</h1>
+<h2>Követelmények:</h2>
+<ul>
+    <li><strong>kiterjesztés:</strong> .csv vagy .txt; <strong>karakterkódolás:</strong> utf-8; <strong>elválasztó:</strong> tabulátor</li>
+    <li>a <strong>tizedesvesszőket</strong> pontokkal kell jelölni, pl. 10.2</li>
+    <li>a <strong>fejlécben szereplő mezőnevek:</strong> ert_id* (egész), mvp_azo* (max 25 karakter), mvp_eov_y* és mvp_eov_x* (max 2 tizedes szám), mvp_pontossag (max 1 tizedes szám), mvp_wgs84_fi* és mvp_wgs84_lambda* (tizedes számok), mvp_mtvz és megjegyzes (max 25 karakter) — a csillaggal (*) jelölt mezők megadása kötelező</li>
+    <li>mvp_eov_y &gt; 400000 és mvp_eov_x &lt; 400000</li>
+    <li>mvp_wgs84_fi &gt; mvp_wgs84_lambda</li>
+</ul>
+<h2>Mintaállomány:</h2>
+<img src="{% static 'project_creation/files/MVP_import_minta_800x57.jpg' %}">
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>CSV feltöltése</h3>
+    {{ form.as_p }}
+    <input type="hidden" name="action" value="mvp_create_from_csv">
+    <input type="hidden" name="post" value="yes">
+    <br><br>
+    <input type="submit" value="Import CSV"></input>
+    <a href="#" class="button cancel-link">{% translate "No, take me back" %}</a>
+</form>
+
+{% endblock %}

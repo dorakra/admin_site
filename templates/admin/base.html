@@ -1,0 +1,9 @@
+{# A template to style the admin site #}
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block extrastyle %}{{ block.super }}
+    <link rel="stylesheet" href="{% static "project_creation/css/base.css" %}">
+{% endblock %}
+
+

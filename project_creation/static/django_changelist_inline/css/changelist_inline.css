@@ -1,0 +1,19 @@
+/*! django-changelist-inline v1.0.2 | (c) 2021-present Tomek Wójcik | MIT License */
+.django_changelist_inline h2 {
+    text-transform: uppercase;
+}
+
+.django_changelist_inline #toolbar {
+    display: flex;
+    font-size: 12px;
+    margin-bottom: 0px !important;
+}
+
+.django_changelist_inline__toolbar a {
+    margin-right: 0.5rem;
+}
+
+.django_changelist_inline__toolbar a:last-child {
+    margin-left: auto;
+    margin-right: 0px;
+}

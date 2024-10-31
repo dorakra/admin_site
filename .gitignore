@@ -1,0 +1,17 @@
+### Django ###
+*.pyc
+__pycache__/
+
+# environment variables
+.env
+
+# static admin folder (collectstatic letrehozza)
+project_creation/static/admin/
+
+# static regiadmin folder (torolheto)
+project_creation/static/regiadmin/
+
+# patch files
+.patches/
+
+

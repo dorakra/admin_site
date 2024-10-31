@@ -1,0 +1,12 @@
+{# A template to index #}
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div id="content-main">
+  <h2 align="center">Erdőrezervátum adminisztráció</h2>
+  <p align="center">&nbsp;</p>
+  <p align="center">Adminisztrációs felület az ER adatbázis kezeléséhez</p>
+  <p align="center">&nbsp;</p>
+  <p align="center"><a href="https://erdorezervatum.hu/">Vissza az erdőrezervátum honlapra</a><br /><br /><a href="{% url 'admin:index' %}">Tovább az adminisztrációs felületre</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "admin/base_site.html" %}
+{% load i18n l10n admin_urls static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {{ media }}
+    <script src="{% static 'admin/js/cancel.js' %}" async></script>
+    <script>
+        var optionsObject = {{ csopkatJSON|safe }};
+        var parentId = "csopkat_id";
+        const childIds = ["csoport_id"];
+        //var childId = "csoport_id";
+    </script>
+
+    <script type="text/javascript"  src="{% static 'project_creation/js/hierarchical_select.js' %}"></script>
+
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} ertx-copy{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+&rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+&rsaquo; Mintavételi pontok másolása
+</div>
+{% endblock %}
+
+{% block content %}
+<h1>Kiválasztott mintavételi pontok hozzáadása csoporthoz és projekthez</h1>
+<h2>Összegzés</h2>
+<ul>
+    <li>Mintavételi pontok: {{ object_count }}</li>
+</ul>
+<h2>Válassza ki, hogy melyik csoporthoz és projekthez tartozzanak a kiválasztott mintavételi pontok!</h2>
+
+<form method="POST">{% csrf_token %}
+  <h3>Csoport kategóriák</h3>
+  <select name="csopkat_id" id="csopkat_id" required>
+      <option value="" selected="selected">Válasszon kategóiát</option>
+  </select>
+  <h3>Csoportok</h3>
+  <select name="csoport_id" id="csoport_id" required>
+      <option value="" selected="selected">Válasszon csoportot</option>
+  </select>
+  <h3>Projektek</h3>
+  <select name="prj_id" required>
+      {% for prj in prj_values %}
+      <option value="{{ prj.0 }}" >{{ prj.1 }}</option>
+      {% endfor %}
+  </select>
+  {% for obj in queryset %}
+  <input type="hidden" name="{{ action_checkbox_name }}" value="{{ obj.pk|unlocalize }}">
+  {% endfor %}
+  <input type="hidden" name="action" value="prmvp_create">
+  <input type="hidden" name="post" value="yes">
+  <br><br>
+  <input type="submit" value="Mehet">
+  <a href="#" class="button cancel-link">{% translate "No, take me back" %}</a>
+</form>
+
+{% endblock %}

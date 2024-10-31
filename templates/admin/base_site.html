@@ -1,0 +1,12 @@
+{# Template which inserts the logo and title text at the top of the page #}
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block branding %}
+    <h1 id="site-name">
+        <a href="https://erdorezervatum.hu/">
+            <img src="{% static 'project_creation/logo.png' %}" height="60px"/>
+        </a>
+        <a href="{% url 'admin:index' %}"> Erdőrezervátum adminisztráció </a>
+    </h1>
+{% endblock %}
